@@ -1,7 +1,4 @@
-Sistema Super Trunfo - Nível Aventureiro (Países)
-Vou expandir o programa para incluir os cálculos de Densidade Populacional e PIB per capita, conforme solicitado.
 
-c
 #include <stdio.h>
 
 struct Carta {
