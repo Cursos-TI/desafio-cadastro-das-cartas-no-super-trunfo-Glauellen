@@ -1,0 +1,103 @@
+
+c
+#include <stdio.h>
+#include <string.h>
+
+struct Carta {
+    char codigo[4]; // Ex: A01, B02
+    unsigned long int populacao;
+    float area;
+    float pib;
+    int pontos_turisticos;
+    float densidade_populacional;
+    float pib_per_capita;
+    float super_poder;
+};
+
+void compararAtributo(const char* nome, float valor1, float valor2, int inverso) {
+    printf("%s: ", nome);
+    if ((!inverso && valor1 > valor2) || (inverso && valor1 < valor2)) {
+        printf("Carta 1 vence (%s)\n", inverso ? "menor" : "maior");
+    } else if (valor1 == valor2) {
+        printf("Empate\n");
+    } else {
+        printf("Carta 2 vence (%s)\n", inverso ? "menor" : "maior");
+    }
+}
+
+int main() {
+    struct Carta carta1, carta2;
+    
+    // Cadastro da primeira carta
+    printf("Cadastro da primeira carta:\n");
+    printf("Digite o codigo da carta (ex: A01): ");
+    scanf("%3s", carta1.codigo);
+    printf("Digite a populacao: ");
+    scanf("%lu", &carta1.populacao);
+    printf("Digite a area: ");
+    scanf("%f", &carta1.area);
+    printf("Digite o PIB: ");
+    scanf("%f", &carta1.pib);
+    printf("Digite o numero de pontos turisticos: ");
+    scanf("%d", &carta1.pontos_turisticos);
+    
+    // Calcula atributos derivados para a primeira carta
+    carta1.densidade_populacional = carta1.populacao / carta1.area;
+    carta1.pib_per_capita = carta1.pib / carta1.populacao;
+    carta1.super_poder = carta1.populacao + carta1.area + carta1.pib + 
+                        carta1.pontos_turisticos + carta1.pib_per_capita + 
+                        (1.0f / carta1.densidade_populacional);
+    
+    // Cadastro da segunda carta
+    printf("\nCadastro da segunda carta:\n");
+    printf("Digite o codigo da carta (ex: B02): ");
+    scanf("%3s", carta2.codigo);
+    printf("Digite a populacao: ");
+    scanf("%lu", &carta2.populacao);
+    printf("Digite a area: ");
+    scanf("%f", &carta2.area);
+    printf("Digite o PIB: ");
+    scanf("%f", &carta2.pib);
+    printf("Digite o numero de pontos turisticos: ");
+    scanf("%d", &carta2.pontos_turisticos);
+    
+    // Calcula atributos derivados para a segunda carta
+    carta2.densidade_populacional = carta2.populacao / carta2.area;
+    carta2.pib_per_capita = carta2.pib / carta2.populacao;
+    carta2.super_poder = carta2.populacao + carta2.area + carta2.pib + 
+                        carta2.pontos_turisticos + carta2.pib_per_capita + 
+                        (1.0f / carta2.densidade_populacional);
+    
+    // Exibição dos dados
+    printf("\nDados das cartas cadastradas:\n");
+    
+    printf("\nCarta %s:\n", carta1.codigo);
+    printf("Populacao: %lu\n", carta1.populacao);
+    printf("Area: %.2f\n", carta1.area);
+    printf("PIB: %.2f\n", carta1.pib);
+    printf("Pontos Turisticos: %d\n", carta1.pontos_turisticos);
+    printf("Densidade Populacional: %.2f hab/km²\n", carta1.densidade_populacional);
+    printf("PIB per capita: %.2f\n", carta1.pib_per_capita);
+    printf("Super Poder: %.2f\n", carta1.super_poder);
+    
+    printf("\nCarta %s:\n", carta2.codigo);
+    printf("Populacao: %lu\n", carta2.populacao);
+    printf("Area: %.2f\n", carta2.area);
+    printf("PIB: %.2f\n", carta2.pib);
+    printf("Pontos Turisticos: %d\n", carta2.pontos_turisticos);
+    printf("Densidade Populacional: %.2f hab/km²\n", carta2.densidade_populacional);
+    printf("PIB per capita: %.2f\n", carta2.pib_per_capita);
+    printf("Super Poder: %.2f\n", carta2.super_poder);
+    
+    // Comparação das cartas
+    printf("\nComparacao entre as cartas:\n");
+    compararAtributo("Populacao", carta1.populacao, carta2.populacao, 0);
+    compararAtributo("Area", carta1.area, carta2.area, 0);
+    compararAtributo("PIB", carta1.pib, carta2.pib, 0);
+    compararAtributo("Pontos Turisticos", carta1.pontos_turisticos, carta2.pontos_turisticos, 0);
+    compararAtributo("Densidade Populacional", carta1.densidade_populacional, carta2.densidade_populacional, 1);
+    compararAtributo("PIB per capita", carta1.pib_per_capita, carta2.pib_per_capita, 0);
+    compararAtributo("Super Poder", carta1.super_poder, carta2.super_poder, 0);
+    
+    return 0;
+}
